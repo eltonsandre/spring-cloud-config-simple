@@ -1,0 +1,31 @@
+server.port: 8888
+
+spring:
+  profiles.active: git
+  application.name: config-server
+  output.ansi.enabled: ALWAYS
+
+  cloud:
+    config:
+      fail-fast: true
+      override-system-properties: true
+      name: ${spring.application.name}
+      server:
+        default-label: main
+        default-application-name: application
+        bootstrap: true
+        git:
+          uri: https://github.com/eltonsandre/spring-cloud-config-repository-bus-simple.git
+          username: eltonsandre
+          password: ''
+          default-label: main
+          basedir: ${user.home}/.config-repo/${spring.application.name}/default
+          timeout: 60
+          force-pull: true
+          clone-on-start: true
+
+
+---
+spring:
+  profiles: local
+  cloud.config.server.native.searchLocations: .../../configs-repository

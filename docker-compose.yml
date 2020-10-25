@@ -1,0 +1,55 @@
+version: '3.8'
+
+x-svc-default: &default_svc
+  image: com.github.eltonsandre/simple/spring-config-client-bus-simple:latest
+  restart: on-failure
+  env_file:
+    - dc.env
+  volumes:
+    - /etc/localtime:/etc/localtime:ro
+    - /etc/timezone:/etc/timezone:ro
+#  network_mode: bridge
+
+
+services:
+
+  cloud-config-server:
+    <<: *default_svc
+    hostname: cloud-config-server
+    container_name: cloud-config-server
+    build:
+      context: ./spring-config-server-bus-simple
+      dockerfile: Dockerfile
+    image: com.github.eltonsandre/simple/spring-config-server-bus-simple:latest
+    ports:
+      - 8888:80
+
+  client-one:
+    <<: *default_svc
+    hostname: client-one
+    container_name: client-one
+    build:
+      context: ./spring-config-client-bus-simple
+      dockerfile: Dockerfile
+    environment:
+      APP_NUMBER: 1
+      SPRING_CLOUD_CONFIG_URI: http://192.168.5.120:8888
+    ports:
+      - 8001:80
+    depends_on:
+      - cloud-config-server
+
+  client-two:
+    <<: *default_svc
+    hostname: client-two
+    container_name: client-two
+    environment:
+      APP_NUMBER: 2
+      SPRING_CLOUD_CONFIG_URI: http://192.168.5.120:8888
+    ports:
+      - 8002:80
+    depends_on:
+      - cloud-config-server
+
+volumes:
+  data: {}

@@ -1,0 +1,15 @@
+spring:
+  application.name: app-client-${APP_NUMBER}
+  #  profiles.active: dev
+  output.ansi.enabled: ALWAYS
+
+  cloud:
+    config:
+      fail-fast: true
+      uri: ${IP_HOST:localhost}:8888
+      name: ${spring.application.name}
+      label: main
+      retry:
+        max-attempts: 20
+        max-interval: 15000
+        initial-interval: 10000
