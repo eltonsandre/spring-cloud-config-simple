@@ -1,15 +1,29 @@
 spring:
   application.name: app-client-${APP_NUMBER}
-  #  profiles.active: dev
+  #  profiles.active: local
   output.ansi.enabled: ALWAYS
 
   cloud:
     config:
       fail-fast: true
-      uri: ${IP_HOST:localhost}:8888
+      uri: https://cloud-config-server-bus.herokuapp.com
       name: ${spring.application.name}
       label: main
       retry:
         max-attempts: 20
         max-interval: 15000
         initial-interval: 10000
+
+---
+spring:
+  profiles: local
+  cloud.config.uri: http://localhost:8888
+
+
+#  spring.cloud.config.label: main
+#  spring.cloud.config.label: develop #dev
+#  spring.cloud.config.label: qa      #qa
+#  spring.cloud.config.label: master  #prod
+#
+#  SPRING_CLOUD_CONFIG_LABEL: main | master
+#  SPRING_CLOUD_CONFIG_URI: localhost:8080

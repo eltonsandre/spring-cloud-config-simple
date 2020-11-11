@@ -13,6 +13,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class AppConfigProperties {
 
     private String id;
+    private String name;
     private String msg;
+    private String db;
+    private String kafka;
 
 }

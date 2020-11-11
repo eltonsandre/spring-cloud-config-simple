@@ -1,12 +1,14 @@
 package com.github.eltonsandre.simple.app.client.dto;
 
-import com.github.eltonsandre.simple.app.client.configuration.properties.AppConfigProperties;
-import com.github.eltonsandre.simple.app.client.configuration.properties.MainConfigProperties;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.experimental.FieldDefaults;
+
+import com.github.eltonsandre.simple.app.client.configuration.properties.AppConfigImmutableProperties;
+import com.github.eltonsandre.simple.app.client.configuration.properties.AppConfigProperties;
+import com.github.eltonsandre.simple.app.client.configuration.properties.MainConfigProperties;
 
 /**
  * @author eltonsandre
@@ -17,8 +19,9 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class AnyDTO {
 
-    AppConfigProperties appConfigProperties;
-    MainConfigProperties mainConfigProperties;
+    AppConfigProperties configApp;
+    AppConfigImmutableProperties configAppImmutable;
+    MainConfigProperties configDefault;
 
 }
 
