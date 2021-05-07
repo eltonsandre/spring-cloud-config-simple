@@ -1,0 +1,25 @@
+spring:
+  profiles:
+    active: dev
+#    SPRING_PROFILES_ACTIVE: dev
+#    --spring.profiles.active=dev
+    include:
+      - db
+      - kafaka
+
+---
+spring:
+  profiles: db
+
+  datasource:
+    username: user
+    password: pass
+
+---
+spring:
+  profiles: kafka
+
+  kafka:
+    client-id: id-1234
+    bootstrap-servers:
+      - localhost:9092

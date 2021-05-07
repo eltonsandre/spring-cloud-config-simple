@@ -12,7 +12,7 @@ spring:
       server:
         default-label: main
         default-application-name: application
-        bootstrap: true
+        bootstrap: true  #SPRING_CLOUD_CONFIG_SERVER_BOOTSTRAP
         git:
           uri: https://github.com/eltonsandre/spring-cloud-config-repository-bus-simple.git
           username: eltonsandre
@@ -24,11 +24,13 @@ spring:
           clone-on-start: true
 
         native:
+
 #          default-label: main
           add-label-locations: false
           searchLocations:
-            - .../../configs-repository/app-client-configs/
-#            - .../../configs-repository/microservices-configs/*
+            - /media/dados/elton/develop/samples/java/configs-repository/app-client-configs
+#            - '.../../configs-repository/microservices-configs'
 
 encrypt:
   key: keyEncryptSecret
+

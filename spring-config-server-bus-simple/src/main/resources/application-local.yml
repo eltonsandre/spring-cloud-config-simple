@@ -1,4 +1,6 @@
 spring:
+  profiles: local
+
   kafka:
     client-id: ${spring.application.name}
     bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
@@ -9,40 +11,13 @@ spring:
       enabled: true
       trace.enabled: true
       destination: config-server-bus.app
-
-    config:
-      override-none: false
-      override-system-properties: true
-      server:
-        git:
-          repos:
-            app-client:
-              timeout: 30
-              force-pull: true
-              clone-on-start: true
-              pattern: app-client-*
-              searchPaths: app-client-*
-              uri: ${spring.cloud.config.server.git.uri}
-              username: ${spring.cloud.config.server.git.username}
-              password: ${spring.cloud.config.server.git.password}
-              basedir: ${user.home}/.config-repo/${spring.application.name}/app-client
-
-            microservice:
-              timeout: 30
-              force-pull: true
-              clone-on-start: true
-              pattern: '*'
-              searchPaths: microservices-*
-              uri: ${spring.cloud.config.server.git.uri}
-              username: ${spring.cloud.config.server.git.username}
-              password: ${spring.cloud.config.server.git.password}
-              basedir: ${user.home}/.config-repo/${spring.application.name}/microservice
-
+      abc: abc
 
 management:
   endpoints.web.exposure.include: '*'
 #  endpoint.health.probes.enabled: true
   health:
+    probes.enabled: true
     binders.enabled: false
 
 logging.level:
